@@ -38,6 +38,10 @@ func Read(r io.Reader, bits Bits) (int, error) {
 		bytesRead += j
 	}
 
+	for i := 0; i < bytesRead; i++ {
+		bitsRead += copy(bits[i*8:], ByteToBits(byteBuf[i]))
+	}
+
 	if err != nil {
 		if errors.Is(err, io.EOF) {
 			err = fmt.Errorf("%s: %w", ErrReadingIntoBits, err) // Wrap io.EOF instead as clear indicator that EOF was reached
@@ -45,10 +49,6 @@ func Read(r io.Reader, bits Bits) (int, error) {
 		}
 
 		return bitsRead, fmt.Errorf("%w: %s", ErrReadingIntoBits, err)
-	}
-
-	for i := 0; i < bytesRead; i++ {
-		bitsRead += copy(bits[i*8:], ByteToBits(byteBuf[i]))
 	}
 
 	return bitsRead, nil
