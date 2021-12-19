@@ -83,3 +83,67 @@ func TestRead_NilReader(t *testing.T) {
 		t.Errorf("Failed to get expected error\nWanted %s\nGot    %s", ErrReadingIntoBits, err)
 	}
 }
+
+func TestBits_ReadFrom(t *testing.T) {
+	{
+		bits := make(Bits, 0)
+		buf := bytes.NewBufferString("a")
+		n, err := bits.ReadFrom(buf)
+		if err != nil {
+			t.Errorf("Failed to call bits.ReadFrom(bytes.Buffer): %s", err)
+		} else if n != 0 {
+			t.Errorf("expected ReadFrom to read 0 bytes; got %d", n)
+		}
+	}
+
+	{
+		bits := make(Bits, 30)
+		buf := bytes.NewBufferString("abcd")
+		n, err := bits.ReadFrom(buf)
+		if err != nil {
+			t.Errorf("Failed to call bits.ReadFrom(bytes.Buffer): %s", err)
+		} else if n != 4 {
+			t.Errorf("expected ReadFrom to read 4 bytes; got %d", n)
+		}
+
+		expected := "011000010110001001100011011001"
+		bitString := bits.String()
+		if bitString != expected {
+			t.Errorf("did not get expected bits with bits.ReadFrom\nWanted %s\nGot    %s", expected, bitString)
+		}
+	}
+
+	{
+		bits := make(Bits, 8)
+		buf := bytes.NewBufferString("a")
+		n, err := bits.ReadFrom(buf)
+		if err != nil {
+			t.Errorf("Failed to call bits.ReadFrom(bytes.Buffer): %s", err)
+		} else if n != 1 {
+			t.Errorf("expected ReadFrom to read 1 byte; got %d", n)
+		}
+
+		expected := "01100001"
+		bitString := bits.String()
+		if bitString != expected {
+			t.Errorf("did not get expected bits with bits.ReadFrom\nWanted %s\nGot    %s", expected, bitString)
+		}
+	}
+
+	{
+		bits := make(Bits, 10)
+		buf := bytes.NewBufferString("a")
+		n, err := bits.ReadFrom(buf)
+		if err != nil {
+			t.Errorf("Failed to call bits.ReadFrom(bytes.Buffer): %s", err)
+		} else if n != 1 {
+			t.Errorf("expected ReadFrom to read 1 byte; got %d", n)
+		}
+
+		expected := "0110000100"
+		bitString := bits.String()
+		if bitString != expected {
+			t.Errorf("did not get expected bits with bits.ReadFrom\nWanted %s\nGot    %s", expected, bitString)
+		}
+	}
+}

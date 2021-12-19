@@ -53,3 +53,14 @@ func Read(r io.Reader, bits Bits) (int, error) {
 
 	return bitsRead, nil
 }
+
+// ReadFrom implements the io.ReaderFrom interface, populating the Bit slice with data
+// from r until bits is filled, or an error occurs. EOF is treated as a nil error.
+func (bits Bits) ReadFrom(r io.Reader) (int64, error) {
+	n, err := Read(r, bits)
+	if errors.Is(err, io.EOF) {
+		err = nil
+	}
+	x := ByteLength(uint32(n))
+	return int64(x), err
+}
