@@ -30,7 +30,7 @@ func Read(r io.Reader, bits Bits) (int, error) {
 		return bitsRead, nil
 	}
 
-	byteBuf := make([]byte, (len(bits)+8-len(bits)%8)/8)
+	byteBuf := make([]byte, bits.ByteLength())
 
 	for err == nil && bytesRead < len(byteBuf) {
 		var j int
