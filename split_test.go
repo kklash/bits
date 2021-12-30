@@ -1,6 +1,7 @@
 package bits
 
 import (
+	"fmt"
 	"reflect"
 	"testing"
 )
@@ -29,4 +30,14 @@ func TestBits_Split(t *testing.T) {
 	test(2, "11111", "11", "11", "1")
 	test(4, "")
 	// TODO test .Split(0) case
+}
+
+func ExampleBits_Split() {
+	bitSlice := BytesToBits([]byte{1, 2, 3, 4, 5})
+	fmt.Println(bitSlice.Split(8))
+	fmt.Println(bitSlice.Split(5))
+
+	// Output:
+	// [00000001 00000010 00000011 00000100 00000101]
+	// [00000 00100 00001 00000 00110 00001 00000 00101]
 }
