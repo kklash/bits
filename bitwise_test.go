@@ -49,11 +49,14 @@ func TestBits_Xor(t *testing.T) {
 	test("110011", "000000", "110011")
 }
 
-func _TestBitwiseOrBenchmark(t *testing.T) {
-	res1 := testing.Benchmark(BenchmarkBitwiseOr)
-	fmt.Println("Bitwise OR benchmark:")
-	fmt.Printf("- %d ns/op\n", res1.NsPerOp())
-	fmt.Printf("- %s\n", res1.T)
+func ExampleBits_Xor() {
+	b1, _ := StringToBits("11001100")
+	b2, _ := StringToBits("11111111")
+
+	xorred := b1.Xor(b2)
+	fmt.Println(xorred)
+	// output:
+	// 00110011
 }
 
 func BenchmarkBitwiseOr(b *testing.B) {

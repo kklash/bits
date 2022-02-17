@@ -1,6 +1,7 @@
 package bits
 
 import (
+	"fmt"
 	"testing"
 )
 
@@ -24,6 +25,17 @@ func TestBits_ShiftRight(t *testing.T) {
 	test("", 1, "")
 }
 
+func ExampleBits_ShiftRight() {
+	bits, _ := StringToBits("11111111")
+	afterShift := bits.ShiftRight(4)
+	fmt.Printf("before: %s\n", bits)
+	fmt.Printf("after:  %s\n", afterShift)
+
+	// output:
+	// before: 11111111
+	// after:  1111
+}
+
 func TestBits_ShiftLeft(t *testing.T) {
 	test := func(input string, nShift uint32, expected string) {
 		bits, _ := StringToBits(input)
@@ -42,4 +54,15 @@ func TestBits_ShiftLeft(t *testing.T) {
 	test("1", 0, "1")
 	test("1", 4, "10000")
 	test("", 4, "0000")
+}
+
+func ExampleBits_ShiftLeft() {
+	bits, _ := StringToBits("11111111")
+	afterShift := bits.ShiftLeft(4)
+	fmt.Printf("before: %s\n", bits)
+	fmt.Printf("after:  %s\n", afterShift)
+
+	// output:
+	// before: 11111111
+	// after:  111111110000
 }
