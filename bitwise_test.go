@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func TestBitwiseOr(t *testing.T) {
+func TestBits_Or(t *testing.T) {
 	test := func(a, b, expected string) {
 		bitsA, _ := StringToBits(a)
 		bitsB, _ := StringToBits(b)
@@ -20,7 +20,7 @@ func TestBitwiseOr(t *testing.T) {
 	test("00000000", "00000000", "00000000")
 }
 
-func TestBitwiseAnd(t *testing.T) {
+func TestBits_And(t *testing.T) {
 	test := func(a, b, expected string) {
 		bitsA, _ := StringToBits(a)
 		bitsB, _ := StringToBits(b)
@@ -34,7 +34,7 @@ func TestBitwiseAnd(t *testing.T) {
 	test("111111", "111000", "111000")
 }
 
-func TestBitwiseXor(t *testing.T) {
+func TestBits_Xor(t *testing.T) {
 	test := func(a, b, expected string) {
 		bitsA, _ := StringToBits(a)
 		bitsB, _ := StringToBits(b)

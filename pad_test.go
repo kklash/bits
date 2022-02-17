@@ -4,7 +4,7 @@ import (
 	"testing"
 )
 
-func TestPadLeft(t *testing.T) {
+func TestBits_PadLeft(t *testing.T) {
 	test := func(n uint32, bitString, expectedBits string) {
 		bits, _ := StringToBits(bitString)
 		if bits == nil {

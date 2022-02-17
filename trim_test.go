@@ -4,7 +4,7 @@ import (
 	"testing"
 )
 
-func TestTrim(t *testing.T) {
+func TestBits_Trim(t *testing.T) {
 	test := func(bitString, expectedBits string) {
 		bits, _ := StringToBits(bitString)
 		bits = bits.Trim()

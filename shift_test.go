@@ -4,7 +4,7 @@ import (
 	"testing"
 )
 
-func TestShiftRight(t *testing.T) {
+func TestBits_ShiftRight(t *testing.T) {
 	test := func(input string, nShift uint32, expected string) {
 		bits, _ := StringToBits(input)
 		actual := bits.ShiftRight(nShift).String()
@@ -24,7 +24,7 @@ func TestShiftRight(t *testing.T) {
 	test("", 1, "")
 }
 
-func TestShiftLeft(t *testing.T) {
+func TestBits_ShiftLeft(t *testing.T) {
 	test := func(input string, nShift uint32, expected string) {
 		bits, _ := StringToBits(input)
 		actual := bits.ShiftLeft(nShift).String()
